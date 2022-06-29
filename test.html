@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      //concat, filter, map, slice, spread(전개) 연산자
+
+      //spread 연산자
+      const a = [1, 2, 3, 4];
+      const b = [...a];
+      b.push(1, 2);
+      console.log(`a의 값은 ${a}`);
+      console.log(`b의 값은 ${b}`);
+
+      //concat 연산자
+      const a2 = [1, 2, 3, 4];
+      const b2 = a2.concat(5);
+      const c2 = a2.push(5);
+      const d2 = [0, ...a2, 6];
+      console.log(`a2의 값은 ${a2}`);
+      console.log(`b2의 값은 ${b2}`);
+      console.log(`c2의 값은 ${c2}`);
+      console.log(`d2의 값은 ${d2}`);
+
+      //filter 연산자 걸러내기 -> 삭제하기
+      const a3 = [1, 2, 3];
+      b3 = a3.filter((n) => {
+        return n != 1;
+      }); // boolean 을 return 받는다. -> true 만 걸러낸다.
+      console.log(b3); // 2,3
+
+      //map 연산자 -> 반복하기
+      const a5 = [1, 2, 3];
+      const b5 = a5.map((n) => n + 15);
+      //   a5.forEach((n) => {
+      //     console.log(n);
+      //   }); -> 리턴 못함
+      console.log(`b5의 값은 ${b5}`);
+      console.log(b5);
+
+      //slice 연산자 -> 잘라내기
+      const a4 = [1, 2, 3, 4];
+      const b4 = a4.slice(0, 2);
+      console.log(b4);
+      const c4 = [...a4.slice(0, 2), 77, ...a4.slice(2, 4)];
+      console.log(c4);
+
+      //배열 수정하기 -> map과 spread 응용
+      const data = { pwd: "1234" };
+      const a6 = { id: 7, name: "홍길동", pwd: "7777", age: 17, gender: "남" };
+      const b6 = { ...a6, name: "한선용", ...data }; // { , }뒤의 값이 앞의 값을 덮어씌운다.(순서 조심)
+      console.log(b6);
+
+      const users = [
+        { id: 1, name: "강호동", pwd: "2222" },
+        { id: 2, name: "유재석", pwd: "3333" },
+        { id: 3, name: "신동엽", pwd: "4444" },
+      ];
+      console.log(users);
+
+      const updateUserDto = {
+        id: 3,
+        name: "드래곤",
+      };
+      const newUsers = users.map((user) =>
+        user.id === updateUserDto.id ? { ...user, ...updateUserDto } : user
+      );
+      console.log(newUsers);
+      //
+    </script>
+  </body>
+</html>
