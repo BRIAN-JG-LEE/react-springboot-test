@@ -1,25 +1,40 @@
 import logo from "./logo.svg";
 import "./App.css";
-import { useState } from "react";
-import Sub from "./Sub";
+import { useEffect, useState } from "react";
 
 function App() {
-  // let number = 1; -> 상태값 아님
+  const [data, setData] = useState(7);
+  const [search, setSearch] = useState(0);
 
-  const [number, setNumber] = useState(1); // -> React 안에 hooks 라이브러리 상태값이 됨
-
-  const add = () => {
-    setNumber(number + 1); // -> React 한테 number 값 변경할게 라고 요청
-    console.log("add=", number);
+  const download = () => {
+    let downloadData = 3;
+    setData(downloadData);
   };
-  // 랜더링 시점 = 상태값 변경
+  // 실행시점
+  // (1) App() 함수가 최초 실행될 때(마운트 될 때) App() 그림이 최초 그려질 때
+  // (2) 상태 변수가 변경될 때 (그게 dependencyList 에 등록이 되어있어야 함)
+  useEffect(() => {
+    console.log("useEffect실행");
+    download();
+  }, [search]);
+
   return (
     <div>
-      <div>
-        <h1>숫자:{number}</h1>
-        <button onClick={add}>더하기 계산</button>
-        <Sub />
-      </div>
+      <button
+        onClick={() => {
+          setSearch(2);
+        }}
+      >
+        검색하기!
+      </button>
+      <h1>Hello, my data is {search}</h1>
+      <button
+        onClick={() => {
+          setSearch(search + 1);
+        }}
+      >
+        더하기
+      </button>
     </div>
   );
 }
