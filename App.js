@@ -1,32 +1,25 @@
 import logo from "./logo.svg";
 import "./App.css";
-
-// 0. React 는 엔진 - 데이터변경감지에서 UI 그려주는
-// 1. 실행 과정(index.html) -SPA 싱글페이지 어플리케이션
-// 2. JSX 문법
-
-// (1) return 시에 하나의 DOM만 리턴할 수 있다.
-// (2) 변수선언은 let 혹은 const 로만 한다.
-// (3) if 사용 대신에 -> 삼항연산자
-// (4) 조건부 렌더링
-// (5) CSS 디자인
-//      -내부에 적는 방법
-//      -외부 파일에 적는 방법
-//      -라이브러리 사용(부트스트랩, component-styled)
-
-let a = 14;
-const b = 46;
+import { useState } from "react";
+import Sub from "./Sub";
 
 function App() {
-  let c;
-  console.log(111, c);
+  // let number = 1; -> 상태값 아님
+
+  const [number, setNumber] = useState(1); // -> React 안에 hooks 라이브러리 상태값이 됨
+
+  const add = () => {
+    setNumber(number + 1); // -> React 한테 number 값 변경할게 라고 요청
+    console.log("add=", number);
+  };
+  // 랜더링 시점 = 상태값 변경
   return (
     <div>
-      <h1 className="box-style">
-        헤딩태그{a === 14 ? "14입니다" : "14가 아닙니다"}
-      </h1>
-      <hr />
-      안녕하십니까?{b} 이게 될까? 이게 되네...
+      <div>
+        <h1>숫자:{number}</h1>
+        <button onClick={add}>더하기 계산</button>
+        <Sub />
+      </div>
     </div>
   );
 }
