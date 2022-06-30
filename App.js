@@ -1,40 +1,37 @@
 import logo from "./logo.svg";
 import "./App.css";
-import { useEffect, useState } from "react";
+import { createRef, useEffect, useRef, useState } from "react";
 
 function App() {
-  const [data, setData] = useState(7);
-  const [search, setSearch] = useState(0);
+  // useRef (디자인)
+  // dom 을 변경할 때 사용
 
-  const download = () => {
-    let downloadData = 3;
-    setData(downloadData);
-  };
-  // 실행시점
-  // (1) App() 함수가 최초 실행될 때(마운트 될 때) App() 그림이 최초 그려질 때
-  // (2) 상태 변수가 변경될 때 (그게 dependencyList 에 등록이 되어있어야 함)
-  useEffect(() => {
-    console.log("useEffect실행");
-    download();
-  }, [search]);
+  const myRef = useRef(null);
+
+  const [list, setList] = useState([
+    { id: 1, name: "john" },
+    { id: 2, name: "tony" },
+  ]);
+
+  const myRefs = Array.from({ length: list.length }).map(() => createRef());
 
   return (
     <div>
       <button
         onClick={() => {
-          setSearch(2);
+          myRef.current.style.backgroundColor = "#87ceeb";
+          console.log(myRefs);
+          myRefs[1].current.style.backgroundColor = "#ff7f50";
         }}
       >
-        검색하기!
+        색깔 변경
       </button>
-      <h1>Hello, my data is {search}</h1>
-      <button
-        onClick={() => {
-          setSearch(search + 1);
-        }}
-      >
-        더하기
-      </button>
+      <div ref={myRef}>박스 in the house</div>
+      <div>
+        {list.map((user, index) => (
+          <h1 ref={myRefs[index]}>{user.name}</h1>
+        ))}
+      </div>
     </div>
   );
 }
