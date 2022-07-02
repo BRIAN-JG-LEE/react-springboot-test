@@ -1,17 +1,14 @@
+import React from "react";
 import "./App.css";
-import HomePage from "./pages/HomePage";
-import Header from "./components/Header";
-import Footer from "./components/Footer";
-import { Route } from "react-router-dom";
-import LoginPage from "./pages/LoginPage";
+import Bottom from "./components/Bottom";
+import Top from "./components/Top";
 
 function App() {
   return (
-    <div>
-      <Header />
-      <Route path="/" exact={true} component={HomePage} />
-      <Route path="/login/:id" exact={true} component={LoginPage} />
-      <Footer />
+    <div className="container">
+      <h1>최상단</h1>
+      <Top />
+      <Bottom />
     </div>
   );
 }
